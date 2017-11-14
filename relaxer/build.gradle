@@ -1,0 +1,48 @@
+group 'ru.velkomfood.employees.services'
+version '2.1'
+
+buildscript {
+
+    ext {
+        vertx_version = '3.5.0'
+        junit_version = '4.12'
+    }
+
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+mainClassName = project.group + '.Launcher'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile "io.vertx:vertx-core:$vertx_version"
+    compile "io.vertx:vertx-web:$vertx_version"
+    testCompile "junit:junit:$junit_version"
+
+}
+
+jar {
+
+    baseName = project.name
+    version = project.version
+
+    manifest {
+        attributes(
+                'Main-Class': mainClassName
+        )
+    }
+
+    // Ueber jar-file
+    from configurations.compile.collect() { it.isDirectory() ? it : zipTree(it) }
+
+}
