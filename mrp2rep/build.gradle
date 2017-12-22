@@ -1,0 +1,59 @@
+buildscript {
+    ext {
+        main_class = 'Pusher'
+        vertx_version = '3.5.0'
+        mysql_version = '5.1.45'
+    }
+}
+
+group 'ru.velkomfood.mrp2.infosys'
+version '7.1'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+mainClassName = project.group + ".${main_class}"
+
+sourceCompatibility = 1.9
+targetCompatibility = 1.9
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "io.vertx:vertx-web:$vertx_version"
+    compile "mysql:mysql-connector-java:$mysql_version"
+}
+
+// Ueber jar file
+jar {
+
+    baseName = project.name
+    version = project.version
+
+    manifest {
+        attributes(
+                'Main-Class': mainClassName
+        )
+    }
+
+    from configurations.compile.collect() { it.isDirectory() ? it : zipTree(it) }
+
+}
+
+// Manage the distribution
+task createDistribution(type: Copy) {
+    from 'build/libs'
+    into 'dist'
+}
+
+task pushAdditionalFiles(type: Copy) {
+    from fileTree(dir: 'webroot', include: '**/*')
+    into 'dist/webroot'
+}
+
+task deleteDistribution(type: Delete) {
+    delete 'dist'
+}
+

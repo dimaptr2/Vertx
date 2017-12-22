@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ППМ за полгода</title>
+    <link rel="stylesheet" href="js/jquery-ui.min.css">
+    <link rel="stylesheet" href="js/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="js/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="css/mrp3.css">
+    <script src="js/external/jquery/jquery.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/mrp3.js"></script>
+</head>
+<body>
+<div id="wrapper" class="wrapper">
+    <div id="header" class="top-header top-header1">
+        <h2>Прогноз потребностей в сырье и материалах</h2>
+    </div>
+    <nav id="parameters" class="left-panel-style">
+        <label id="first" class="label1">Начальный период</label>
+        <br>
+        <input id="fromPer" type="text" class="input1" placeholder="Месяц-Год">
+        <br>
+        <label id="second" class="label1">С материала</label>
+        <br>
+        <input id="matnrLow" type="text" class="input1">
+        <br>
+        <label id="third" class="label1">По материал</label>
+        <br>
+        <input id="matnrHigh" type="text" class="input1">
+        <br>
+        <label id="fourth" class="label1">Группа закупок</label>
+        <select id="purGroup" class="input1">
+            <option value="001">001 Маркова А.</option>
+            <option value="002">002 Маркова А.</option>
+            <option value="003">003 Крутова Н.</option>
+            <option value="004">004 Горбатова М.</option>
+            <option value="005">005 Филистов А.</option>
+            <option value="006">006 Мясосырье</option>
+            <option value="007">007 Услуги</option>
+            <option value="010">010 Инвестиции</option>
+            <option value="011">011 Калинина А.</option>
+            <option value="012">012 Ерёмин С.</option>
+            <option value="999">999 Бухгалтерия</option>
+        </select>
+        <br>
+        <button id="Run" value="RUN" class="button1 button2">Выполнить</button>
+        <br>
+        <button id="Excel" value="EXCEL" class="button1 button2">В Excel</button>
+        <br>
+        <label id="fifth" class="label1">Процесс загрузки</label>
+        <br>
+        <div id="progressbar0" class="input1 ui-progressbar">
+        </div>
+    </nav>
+    <div id="content" class="data-area-style">
+        <table id="main-table" class="responstable">
+            <thead id="tab-header">
+            <tr id="tabhead">
+                <th>Материал</th>
+                <th>Наименование</th>
+                <th>ГрЗакупок</th>
+                <th>Склад</th>
+                <th>ЕИ</th>
+                <th>СвобЗапас</th>
+                <th>Перемещен</th>
+                <th>КонтрольКачества</th>
+                <th>Блокирован</th>
+            </tr>
+            </thead>
+            <tbody id="tab-body">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
