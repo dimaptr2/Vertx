@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.velkomfood.services.edi.ports</groupId>
+    <artifactId>ediport</artifactId>
+    <version>2.1</version>
+
+    <properties>
+        <java.version>1.9</java.version>
+        <sapidoc>/usr/sap/JCo/sapidoc3.jar</sapidoc>
+        <sapjco>/usr/sap/JCo/sapjco3.jar</sapjco>
+        <mvn.compiler>3.7.0</mvn.compiler>
+        <mvn.shade>3.1.0</mvn.shade>
+        <vertx.version>3.5.1</vertx.version>
+    </properties>
+
+    <dependencies>
+
+        <!--SAP IDOC-->
+        <dependency>
+            <groupId>sapidoc3</groupId>
+            <artifactId>sapidoc3</artifactId>
+            <version>3.0</version>
+            <scope>system</scope>
+            <systemPath>${sapidoc}</systemPath>
+        </dependency>
+
+        <!--SAP Java Connector-->
+        <dependency>
+            <groupId>sapjco3</groupId>
+            <artifactId>sapjco3</artifactId>
+            <version>3.0</version>
+            <scope>system</scope>
+            <systemPath>${sapjco}</systemPath>
+        </dependency>
+
+        <!--Vertx Web libraries-->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-web</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+
+        <!--Vertx RxJava library-->
+        <!--<dependency>-->
+            <!--<groupId>io.vertx</groupId>-->
+            <!--<artifactId>vertx-rx-java</artifactId>-->
+            <!--<version>${vertx.version}</version>-->
+        <!--</dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.197</version>
+        </dependency>
+
+        <!--Vertx JDBC client-->
+        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-mysql-postgresql-client -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-jdbc-client</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+
+        <!--Classic Logger-->
+        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <plugins>
+
+            <!--Maven compiler plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${mvn.compiler}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <!--Maven shade plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${mvn.shade}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${project.groupId}.Pusher</mainClass>
+                                    <manifestEntries>
+                                        <Class-Path>${sapidoc} ${sapjco}</Class-Path>
+                                    </manifestEntries>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+</project>
