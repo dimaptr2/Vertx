@@ -29,10 +29,10 @@ public class RestServer extends AbstractVerticle {
 
         // Prepare the data source properties
         config = new JsonObject()
-                .put("url", "jdbc:mariadb://srv-sapapp:3306/beagle2")
+                .put("url", "XXXXX")
                 .put("driver_class", "org.mariadb.jdbc.Driver")
-                .put("user", "beagleman")
-                .put("password", "12345qwert")
+                .put("user", "XXXXX")
+                .put("password", "XXXXX")
                 .put("max_pool_size", 30);
 
         return this;
