@@ -77,9 +77,7 @@ tasks.register<Copy>("prepareToGit") {
                 "**/*.css",
                 "**/*.gradle",
                 "**/*.kts",
-                "**/*.properties",
-                "**/*.txt",
-                "**/*.xml"
+                "**/*.properties"
         )
     }
 
