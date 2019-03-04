@@ -77,8 +77,11 @@ tasks.register<Copy>("prepareToGit") {
                 "**/*.css",
                 "**/*.gradle",
                 "**/*.kts",
-                "**/*.properties"
+                "**/*.properties",
+                "**/*.txt",
+                "**/*.xml"
         )
+        exclude(".gradle", ".idea", ".vertx")
     }
 
     into("/home/dpetrov/github.com/Vertx/${project.name}")
