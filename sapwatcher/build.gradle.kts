@@ -6,7 +6,7 @@ plugins {
 
 group = "ru.velkomfood.tv.sap.watcher"
 version = "8.0.1"
-val sapJavaConnector = "/usr/sap/JCo/sapjco3.jar"
+val sapJavaConnector = "XXXXXX/sapjco3.jar"
 val vertxVersion = "3.6.3"
 
 application {
@@ -53,7 +53,7 @@ tasks.jar {
 
 // Copy an additional JVM based and not JVM based dependencies into building directory
 tasks.register<Copy>("copySapLibrary") {
-    from("/usr/sap/JCo") {
+    from("XXXXXXXX") {
         include("sapidoc3.jar", "sapjco3.jar", "libsapjco3.so")
     }
     into("build/libs")
@@ -61,7 +61,7 @@ tasks.register<Copy>("copySapLibrary") {
 
 // Refresh the Git directory of this project
 tasks.register<Delete>("deleteGitDir") {
-    delete("/home/dpetrov/github.com/Vertx/${project.name}")
+    delete("XXXXXXXX/${project.name}")
 }
 
 // Prepare to the transfer for Github
@@ -84,5 +84,5 @@ tasks.register<Copy>("prepareToGit") {
         exclude(".gradle", ".idea", ".vertx")
     }
 
-    into("/home/dpetrov/github.com/Vertx/${project.name}")
+    into("XXXXXXXX/${project.name}")
 }
